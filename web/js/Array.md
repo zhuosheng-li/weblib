@@ -148,15 +148,15 @@ fill();
 
   ```js
   let a = [1, 2, 3, 4, 5, 6, 7];
-  
+
   let item = a.splice(0, 3); // [1,2,3]
-  
+
   console.log(a); // [4,5,6,7]
-  
+
   // 从数组下标0开始，删除3个元素
-  
+
   let item = a.splice(-1, 3); // [7]
-  
+
   // 从最后一个元素开始删除3个元素，因为最后一个元素，所以只删除了7
   ```
 
@@ -164,19 +164,19 @@ fill();
 
   ```js
   let a = [1, 2, 3, 4, 5, 6, 7];
-  
+
   let item = a.splice(0,3,'添加'); // [1,2,3]
-  
+
   console.log(a); // ['添加',4,5,6,7]
-  
+
   // 从数组下标0开始，删除3个元素，并添加元素'添加'
-  
+
   let b = [1, 2, 3, 4, 5, 6, 7];
-  
+
   let item = b.splice(-2,3,'添加1','添加2'); // [6,7]
-  
+
   console.log(b); // [1,2,3,4,5,'添加1','添加2']
-  
+
   // 从数组最后第二个元素开始，删除3个元素，并添加两个元素'添加1'、'添加2'
   ```
 
@@ -184,15 +184,15 @@ fill();
 
   ```js
   let a = [1, 2, 3, 4, 5, 6, 7];
-  
+
   let item = a.splice(0,0,'添加1','添加2'); // [] 没有删除元素，返回空数组
-  
+
   console.log(a); // ['添加1','添加2',1,2,3,4,5,6,7]
-  
+
   let b = [1, 2, 3, 4, 5, 6, 7];
-  
+
   let item = b.splice(-1,0,'添加1','添加2'); // [] 没有删除元素，返回空数组
-  
+
   console.log(b); // [1,2,3,4,5,6,'添加1','添加2',7] 在最后一个元素的前面添加两个元素
   ```
 
@@ -203,7 +203,6 @@ fill();
   3. 可以添加很多个元素
   4. 添加是在开始的元素前面添加的
 
-  
 
 ##### sort()数组排序
 
@@ -1448,6 +1447,21 @@ console.log(newArr);// [1, 2, 3, 4]
 
 
 
+#### 删除数组的某个元素
+
+* delete删除掉数组中的元素后，会把该下标出的值置为undefined,**数组的长度不会变**
+* ​
+
+```js
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+```
+
+
+
 
 
 ---
@@ -1456,5 +1470,6 @@ console.log(newArr);// [1, 2, 3, 4]
 
 [奇舞周刊](<https://mp.weixin.qq.com/s/-qpjPRSvNlrHSVnA35WZzw>)
 
-[MDN](<https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array>)
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
+[Array.remove() Method](https://stackoverflow.com/questions/500606/deleting-array-elements-in-javascript-delete-vs-splice/9815010#9815010)
